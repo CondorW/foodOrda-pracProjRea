@@ -7,14 +7,14 @@ export const dishData =[
   },
   {
     "key": 1,
-    "dishName": "sushi",
-    "dishDescription": "Very Fishy fish",
+    "dishName": "pizza",
+    "dishDescription": "italiano",
     "dishPrice": 29
   },
   {
     "key": 2,
-    "dishName": "sushi",
-    "dishDescription": "Very Fishy fish",
+    "dishName": "burgir",
+    "dishDescription": "burgir croissant",
     "dishPrice": 29
   }
 ]
