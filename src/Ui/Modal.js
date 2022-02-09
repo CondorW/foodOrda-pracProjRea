@@ -1,17 +1,25 @@
 import { useContext } from "react";
+import { createPortal } from "react-dom";
+import { Fragment } from "react/cjs/react.production.min";
 import { cContext } from "../store/CartContext";
 import ModalCard from "./ModalCard";
+import reactDom from "react-dom";
 
 export default function Modal() {
   const cartC = useContext(cContext);
   const cartItems = cartC.cartItems;
 
-  return (
-    <div
-      onClick={cartC.onShowCart}
-      className="w-full h-full bg-gray-800 fixed bg-opacity-75"
-    >
-      <div className="bg-slate-300 w-1/3 h-40 flex absolute left-1/3 top-1/3 flex-col rounded">
+  const Backdrop = () => {
+    return (
+      <div
+        onClick={cartC.onShowCart}
+        className="w-full h-full bg-gray-800 fixed bg-opacity-75"
+      ></div>
+    );
+  };
+  const Modal = () => {
+    return (
+      <div className="bg-slate-300 w-1/3 h-auto flex absolute left-1/3 top-1/3 flex-col rounded">
         <div>
           {cartItems.map((ci) => {
             return <ModalCard itemName={ci.dishName}></ModalCard>;
@@ -23,6 +31,19 @@ export default function Modal() {
           </button>
         </div>
       </div>
-    </div>
+    );
+  };
+
+  return (
+    <Fragment>
+      {reactDom.createPortal(
+        <Backdrop></Backdrop>,
+        document.getElementById("overlay-root")
+      )}
+      {reactDom.createPortal(
+        <Modal></Modal>,
+        document.getElementById("modal-root")
+      )}
+    </Fragment>
   );
 }
