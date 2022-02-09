@@ -7,7 +7,7 @@ export default function Cart() {
   const itemCount = cartState.cartItemsCount;
 
   return (
-    <button>
+    <button onClick={cartState.onShowCart}>
       <div className="flex bg-black bg-opacity-50 rounded p-2 m-2 text-white">
         <img className="object-scale-down h-6 pr-2" src={cart} alt="" />
         <h1>Your Cart</h1>

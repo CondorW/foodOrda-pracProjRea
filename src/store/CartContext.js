@@ -5,13 +5,15 @@ export const cContext = createContext({
   cartItems: [],
   cartItemsCount: 0,
   onAdd: (id, amount) => {},
+  showCart: false,
+  onShowCart: () => {},
 });
 var cartArray = [];
 var cartCount = 0;
 
 export default function Context(props) {
   const [itemCountState, setItemCountState] = useState();
-  
+  const [showCartState, setShowCartState] = useState(false);
 
   const addCartHandler = (id, amount) => {
     if (amount > 0 && id >= 0) {
@@ -26,6 +28,14 @@ export default function Context(props) {
     setItemCountState(cartCount);
   };
 
+  const showCartHandler = () => {
+    if (!showCartState) {
+      setShowCartState(true);
+    } else if (showCartState) {
+      setShowCartState(false);
+    }
+    console.log(showCartState);
+  };
 
   return (
     <cContext.Provider
@@ -33,6 +43,8 @@ export default function Context(props) {
         cartItems: cartArray,
         cartItemsCount: itemCountState,
         onAdd: addCartHandler,
+        showCart: showCartState,
+        onShowCart: showCartHandler,
       }}
     >
       {props.children}
