@@ -1,12 +1,13 @@
-import { useContext } from "react";
+import { useContext} from "react";
 import { Fragment } from "react/cjs/react.production.min";
 import { cContext } from "../store/CartContext";
 import ModalCard from "./ModalCard";
 import reactDom from "react-dom";
 
 export default function Modal() {
-  const cartC = useContext(cContext);
-  const cartItems = cartC.cartItems;
+  
+  const cartC = useContext(cContext)
+  
 
   const Backdrop = () => {
     return (
@@ -16,13 +17,19 @@ export default function Modal() {
       ></div>
     );
   };
-  const Modal = () => {
+  const Modal = () => {    
     return (
       <div className="bg-slate-300 w-1/3 h-auto flex absolute left-1/3 top-1/3 flex-col rounded">
         <h1 className="self-center p-2 text-2xl font-bolder">Your Cart</h1>
         <div>
-          {cartItems.map((ci,index) => {
-            return <ModalCard key={index} itemName={ci.dishName}></ModalCard>;
+          {cartC.cartItems.map((ci, index) => {
+            return (
+              <ModalCard
+                id={index}
+                key={index}
+                itemName={ci.dishName}
+              ></ModalCard>
+            );
           })}
         </div>
         <div className="rounded bg-red-400 p-1 m-1 hover:scale-105 hover:bg-red-500 duration-300">
@@ -33,7 +40,6 @@ export default function Modal() {
       </div>
     );
   };
-
   return (
     <Fragment>
       {reactDom.createPortal(
