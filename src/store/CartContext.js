@@ -1,4 +1,4 @@
-import { createContext, useState, useReducer } from "react";
+import { createContext, useReducer } from "react";
 import { dishData } from "../data";
 
 const cartReducer = (state, action) => {
@@ -8,19 +8,19 @@ const cartReducer = (state, action) => {
       return {
         count: action.value,
         items: state.items,
-        cartState: state.cartState,
+        cartState: false,
       };
     case "CART_ITEMS":
       console.log(action.value);
       return {
         count: state.count,
         items: action.value,
-        cartState: state.carState,
+        cartState: false,
       };
     case "DELETE_ITEM":
       console.log(action.value);
       return {
-        count: state.count,
+        count: action.value.length,
         items: action.value,
         cartState: state.cartState,
       };
@@ -29,7 +29,7 @@ const cartReducer = (state, action) => {
       return {
         count: state.count,
         items: state.items,
-        cartState: action.value,
+        cartState: !state.cartState,
       };
     default:
       return state;
@@ -73,11 +73,12 @@ export default function Context(props) {
   };
 
   const showCartHandler = () => {
-    if (!cartState.cartState) {
-      dispatchCartReducer({ type: "CART_STATE", value: true });
-    } else if (cartState.cartState) {
-      dispatchCartReducer({ type: "CART_STATE", value: false });
-    }
+    dispatchCartReducer({type:"CART_STATE"});
+    // if (!cartState.cartState) {
+    //   dispatchCartReducer({ type: "CART_STATE", value: true });
+    // } else if (cartState.cartState) {
+    //   dispatchCartReducer({ type: "CART_STATE", value: false });
+    // }
   };
   return (
     <cContext.Provider
@@ -90,7 +91,6 @@ export default function Context(props) {
         onDelete: deleteCartHandler,
       }}
     >
-      {console.log(cartState)}
       {props.children}
     </cContext.Provider>
   );
