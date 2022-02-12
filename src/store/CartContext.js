@@ -25,7 +25,6 @@ const cartReducer = (state, action) => {
         cartState: state.cartState,
       };
     case "CART_STATE":
-      console.log(action.value);
       return {
         count: state.count,
         items: state.items,
