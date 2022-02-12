@@ -1,16 +1,40 @@
 import { createContext, useState, useReducer } from "react";
 import { dishData } from "../data";
 
-const itemReducer = ()=>{
-  switch (key) {
-    case value:
-      
-      break;
-  
+const cartReducer = (state, action) => {
+  switch (action.type) {
+    case "CART_COUNT":
+      console.log(action.value);
+      return {
+        count: action.value,
+        items: state.items,
+        cartState: state.cartState,
+      };
+    case "CART_ITEMS":
+      console.log(action.value);
+      return {
+        count: state.count,
+        items: action.value,
+        cartState: state.carState,
+      };
+    case "DELETE_ITEM":
+      console.log(action.value);
+      return {
+        count: state.count,
+        items: action.value,
+        cartState: state.cartState,
+      };
+    case "CART_STATE":
+      console.log(action.value);
+      return {
+        count: state.count,
+        items: state.items,
+        cartState: action.value,
+      };
     default:
-      break;
+      return state;
   }
-}
+};
 
 export const cContext = createContext({
   cartItems: [],
@@ -24,11 +48,11 @@ var cartArray = [];
 var cartCount = 0;
 
 export default function Context(props) {
-  const [itemCountState, setItemCountState] = useState();
-  const [showCartState, setShowCartState] = useState(false);
-  const [itemCartState, setItemCartState] = useState([]);
-
-  const [itemReducer, dispatchItemReducer] = useReducer(itemReducer,{itemCount:0,showCart:false, itemCart:[]})
+  const [cartState, dispatchCartReducer] = useReducer(cartReducer, {
+    count: 0,
+    state: false,
+    items: [],
+  });
 
   const addCartHandler = (id, amount) => {
     if (amount > 0 && id >= 0) {
@@ -39,37 +63,34 @@ export default function Context(props) {
       return;
     }
     cartCount = cartArray.length;
-    setItemCartState(cartArray);
-    console.log(cartArray);
-    setItemCountState(cartCount);
+    dispatchCartReducer({ type: "CART_COUNT", value: cartCount });
+    dispatchCartReducer({ type: "CART_ITEMS", value: cartArray });
   };
   const deleteCartHandler = (id) => {
-    const stackArray = itemCartState;
-    stackArray.splice(id,1);
-    setItemCartState(stackArray);
-    console.log(itemCartState);
+    const stackArray = cartState.items;
+    stackArray.splice(id, 1);
+    dispatchCartReducer({ type: "DELETE_ITEM", value: stackArray });
   };
 
   const showCartHandler = () => {
-    if (!showCartState) {
-      setShowCartState(true);
-    } else if (showCartState) {
-      setShowCartState(false);
+    if (!cartState.cartState) {
+      dispatchCartReducer({ type: "CART_STATE", value: true });
+    } else if (cartState.cartState) {
+      dispatchCartReducer({ type: "CART_STATE", value: false });
     }
-    console.log(showCartState);
   };
-  console.log(itemCartState);
   return (
     <cContext.Provider
       value={{
-        cartItems: itemCartState,
-        cartItemsCount: itemCountState,
+        cartItems: cartState.items,
+        cartItemsCount: cartState.count,
         onAdd: addCartHandler,
-        showCart: showCartState,
+        showCart: cartState.cartState,
         onShowCart: showCartHandler,
         onDelete: deleteCartHandler,
       }}
     >
+      {console.log(cartState)}
       {props.children}
     </cContext.Provider>
   );
