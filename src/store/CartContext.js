@@ -38,6 +38,7 @@ const cartReducer = (state, action) => {
 export const cContext = createContext({
   cartItems: [],
   cartItemsCount: 0,
+  cartTotal: 0,
   onAdd: (id, amount) => {},
   onDelete: (id) => {},
   showCart: false,
@@ -72,18 +73,22 @@ export default function Context(props) {
   };
 
   const showCartHandler = () => {
-    dispatchCartReducer({type:"CART_STATE"});
-    // if (!cartState.cartState) {
-    //   dispatchCartReducer({ type: "CART_STATE", value: true });
-    // } else if (cartState.cartState) {
-    //   dispatchCartReducer({ type: "CART_STATE", value: false });
-    // }
+    dispatchCartReducer({ type: "CART_STATE" });
   };
+
+  let totalCartPrice = 0;
+  for (let x = 0; x < cartState.items.length; x++) {
+    console.log(cartState.items[x].dishPrice);
+    totalCartPrice += cartState.items[x].dishPrice;
+  }
+  totalCartPrice = Math.round(totalCartPrice);
+  console.log(totalCartPrice);
   return (
     <cContext.Provider
       value={{
         cartItems: cartState.items,
         cartItemsCount: cartState.count,
+        cartTotal: totalCartPrice,
         onAdd: addCartHandler,
         showCart: cartState.cartState,
         onShowCart: showCartHandler,

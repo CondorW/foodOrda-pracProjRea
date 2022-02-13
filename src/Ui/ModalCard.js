@@ -13,6 +13,7 @@ export default function ModalCard(props) {
       <div className="bg-gray-100 w-10/12 m-1 rounded p-1 flex justify-between">
         <p>{props.itemName}</p>
         <p>{props.itemCount}</p>
+        <p>{props.itemPrice} €</p>
         <p>X</p>
       </div>
     </div>

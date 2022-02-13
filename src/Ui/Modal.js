@@ -26,9 +26,15 @@ export default function Modal() {
                 id={index}
                 key={index}
                 itemName={ci.dishName}
+                itemPrice={ci.dishPrice}
               ></ModalCard>
             );
           })}
+          <div></div>
+        </div>
+        <div className="flex flex-row place-content-between mx-14 text-2xl">
+          <p>Total</p>
+          <p>{cartC.cartTotal} €</p>
         </div>
         <button
           className="rounded bg-red-400 p-1 m-1 hover:scale-105 hover:bg-red-500 duration-300"
