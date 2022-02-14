@@ -81,7 +81,7 @@ export default function Context(props) {
     console.log(cartState.items[x].dishPrice);
     totalCartPrice += cartState.items[x].dishPrice;
   }
-  totalCartPrice = Math.round(totalCartPrice);
+  totalCartPrice = totalCartPrice.toFixed(2);
   console.log(totalCartPrice);
   return (
     <cContext.Provider

@@ -1,6 +1,6 @@
 import { Fragment, useContext } from "react";
 import Navbar from "./Nav/Navbar";
-import alpen from "./alpen.jpg";
+import alpen from "./alpen.jpg"; //file extension matters because it is not a javascript file
 import Description from "./Ui/Description";
 import Menu from "./Ui/Menu";
 import Modal from "./Ui/Modal";
