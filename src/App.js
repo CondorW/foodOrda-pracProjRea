@@ -16,10 +16,10 @@ function App() {
       <div className="bg-gray-900 h-screen">
         <Navbar></Navbar>
         {showCart ? <Modal></Modal> : null}
-        <img className="object-cover h-1/3 w-full bg-fixed z-0" src={alpen} alt="" />
+        <img className="object-cover h-48 w-full" src={alpen} alt="" />
         <div className="flex flex-col">
-        <Description></Description>
-        <Menu></Menu>
+          <Description></Description>
+          <Menu></Menu>
         </div>
       </div>
     </Fragment>
