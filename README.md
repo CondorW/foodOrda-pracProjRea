@@ -1,5 +1,9 @@
+![Home](https://i.imgur.com/FV6Qmcb.png)
+![Cart](https://i.imgur.com/BTCGJVF.png)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+
+
 
 ## Available Scripts
 
