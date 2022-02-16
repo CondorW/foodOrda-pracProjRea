@@ -6,6 +6,8 @@ import reactDom from "react-dom";
 
 export default function Modal() {
   const cartC = useContext(cContext);
+  const overlayRoot = document.getElementById("overlay-root");
+  const modalRoot = document.getElementById("modal-root");
 
   const Backdrop = () => {
     return (
@@ -47,14 +49,8 @@ export default function Modal() {
   };
   return (
     <Fragment>
-      {reactDom.createPortal(
-        <Backdrop></Backdrop>,
-        document.getElementById("overlay-root")
-      )}
-      {reactDom.createPortal(
-        <Modal></Modal>,
-        document.getElementById("modal-root")
-      )}
+      {reactDom.createPortal(<Backdrop></Backdrop>, overlayRoot)}
+      {reactDom.createPortal(<Modal></Modal>, modalRoot)}
     </Fragment>
   );
 }
