@@ -21,6 +21,7 @@ export default function Modal() {
     return (
       <div className="bg-slate-200 w-1/3 h-auto flex absolute left-1/3 top-1/3 flex-col rounded">
         <h1 className="self-center p-2 text-2xl font-bolder">Your Cart</h1>
+        {cartC.cartItems.length <= 0 && <p className="self-center">There is nothing in your Cart - Add some Food M8</p>}
         <div>
           {cartC.cartItems.map((ci, index) => {
             return (
