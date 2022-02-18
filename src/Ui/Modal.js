@@ -43,7 +43,7 @@ export default function Modal() {
           className="rounded bg-red-400 p-1 m-1 hover:scale-105 hover:bg-red-500 duration-300"
           onClick={cartC.onShowCart}
         >
-          <div>Order and Procced to Payment</div>
+          <div>Order and proceed to Payment</div>
         </button>
       </div>
     );
