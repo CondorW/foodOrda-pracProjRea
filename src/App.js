@@ -13,7 +13,7 @@ function App() {
 
   return (
     <Fragment>
-      <div className="bg-gray-900 h-full">
+      <div className="bg-gray-900 h-screen">
         <Navbar></Navbar>
         {showCart ? <Modal></Modal> : null}
         <img className="object-cover h-48 w-full" src={alpen} alt="" />
